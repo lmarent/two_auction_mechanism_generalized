@@ -20,7 +20,7 @@ INC_DIR 	= $(top_srcdir)/include
 lib_LTLIBRARIES = libtwoauctiongen.la
 
 if ENABLE_DEBUG
-AM_CXXFLAGS = -I$(top_srcdir)/include $(PQXX_CFLAGS) -g  -fno-inline -DDEBUG -ggdb
+AM_CXXFLAGS = -I$(top_srcdir)/include -g  -fno-inline -DDEBUG -ggdb
 else
 AM_CXXFLAGS = -I$(top_srcdir)/include -O2
 endif
@@ -30,10 +30,11 @@ endif
 #--------------------------- Two Auction Generalized 
 #-----------------------------------------------------------------------
 
-libtwoauctiongen_la_CPPFLAGS = $(PQXX_CFLAGS)
+libtwoauctiongen_la_CPPFLAGS = 
 
 libtwoauctiongen_la_SOURCES = Error.cp \
-							  TwoAuctionMechanismGeneralized.cpp
+							  TwoAuctionMechanismGeneralized.cpp \
+							  TwoAuctionMechanismGeneralizedWrapper.cpp 
 
 
 # end of Makefile.am

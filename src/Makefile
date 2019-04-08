@@ -144,7 +144,8 @@ am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libtwoauctiongen_la_LIBADD =
 am_libtwoauctiongen_la_OBJECTS =  \
-	libtwoauctiongen_la-TwoAuctionMechanismGeneralized.lo
+	libtwoauctiongen_la-TwoAuctionMechanismGeneralized.lo \
+	libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo
 libtwoauctiongen_la_OBJECTS = $(am_libtwoauctiongen_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -349,13 +350,16 @@ API_INC = $(top_srcdir)/include
 INC_DIR = $(top_srcdir)/include
 lib_LTLIBRARIES = libtwoauctiongen.la
 AM_CXXFLAGS = -I$(top_srcdir)/include -O2
-#AM_CXXFLAGS = -I$(top_srcdir)/include $(PQXX_CFLAGS) -g  -fno-inline -DDEBUG -ggdb
+#AM_CXXFLAGS = -I$(top_srcdir)/include -g  -fno-inline -DDEBUG -ggdb
 
 #-----------------------------------------------------------------------
 #--------------------------- Two Auction Generalized 
 #-----------------------------------------------------------------------
-libtwoauctiongen_la_CPPFLAGS = $(PQXX_CFLAGS)
-libtwoauctiongen_la_SOURCES = TwoAuctionMechanismGeneralized.cpp
+libtwoauctiongen_la_CPPFLAGS = 
+libtwoauctiongen_la_SOURCES = Error.cp \
+							  TwoAuctionMechanismGeneralized.cpp \
+							  TwoAuctionMechanismGeneralizedWrapper.cpp 
+
 all: all-am
 
 .SUFFIXES:
@@ -435,6 +439,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/libtwoauctiongen_la-TwoAuctionMechanismGeneralized.Plo
+include ./$(DEPDIR)/libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.Plo
 
 .cpp.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -466,6 +471,13 @@ libtwoauctiongen_la-TwoAuctionMechanismGeneralized.lo: TwoAuctionMechanismGenera
 #	$(AM_V_CXX)source='TwoAuctionMechanismGeneralized.cpp' object='libtwoauctiongen_la-TwoAuctionMechanismGeneralized.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtwoauctiongen_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libtwoauctiongen_la-TwoAuctionMechanismGeneralized.lo `test -f 'TwoAuctionMechanismGeneralized.cpp' || echo '$(srcdir)/'`TwoAuctionMechanismGeneralized.cpp
+
+libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo: TwoAuctionMechanismGeneralizedWrapper.cpp
+	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtwoauctiongen_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo -MD -MP -MF $(DEPDIR)/libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.Tpo -c -o libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo `test -f 'TwoAuctionMechanismGeneralizedWrapper.cpp' || echo '$(srcdir)/'`TwoAuctionMechanismGeneralizedWrapper.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.Tpo $(DEPDIR)/libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.Plo
+#	$(AM_V_CXX)source='TwoAuctionMechanismGeneralizedWrapper.cpp' object='libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtwoauctiongen_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libtwoauctiongen_la-TwoAuctionMechanismGeneralizedWrapper.lo `test -f 'TwoAuctionMechanismGeneralizedWrapper.cpp' || echo '$(srcdir)/'`TwoAuctionMechanismGeneralizedWrapper.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
